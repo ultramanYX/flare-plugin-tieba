@@ -1,0 +1,71 @@
+{
+  "$schema": "https://unpkg.com/flare-plugin-sdk@next/skill/flare-plugin/manifest.schema.json",
+  "schemaVersion": 1,
+  "apiVersion": 1,
+  "id": "dev.ima.tieba",
+  "version": "0.1.0",
+  "defaultLocale": "zh-Hans",
+  "name": { "key": "plugin.name", "fallback": "贴吧" },
+  "description": {
+    "key": "plugin.description",
+    "fallback": "百度贴吧：吧内帖子流、帖子正文与楼层"
+  },
+  "permissions": {
+    "mediaNetwork": true
+  },
+  "platform": {
+    "id": "tieba",
+    "name": { "key": "platform.name", "fallback": "贴吧" },
+    "detector": {
+      "priority": 0
+    },
+    "loginMethods": [
+      {
+        "id": "browser",
+        "interaction": "WebCookie",
+        "title": { "key": "login.browser.title", "fallback": "用浏览器登录" },
+        "cookie": {
+          "startUrl": "$accountOrigin/",
+          "probes": [
+            {
+              "url": "$accountOrigin/mo/q/newmoindex?need_user=1",
+              "cookies": [
+                { "name": "BDUSS", "required": true },
+                { "name": "BAIDUID", "required": true }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "capabilities": {
+      "flare.datasource.timeline/v1": {
+        "operations": {
+          "page": {
+            "directions": ["refresh", "older"]
+          }
+        }
+      },
+      "flare.datasource.tab-catalog/v1": {
+        "operations": {
+          "page": {}
+        }
+      },
+      "flare.datasource.post/v1": {
+        "operations": {
+          "detail": {},
+          "context": {}
+        }
+      }
+    },
+    "timelines": [
+      {
+        "id": "hot",
+        "title": { "key": "timeline.hot.title", "fallback": "贴吧热议" },
+        "icon": "Featured",
+        "display": "List",
+        "defaultForNewAccount": true
+      }
+    ]
+  }
+}

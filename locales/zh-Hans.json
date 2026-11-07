@@ -1,0 +1,7 @@
+{
+  "plugin.name": "贴吧",
+  "plugin.description": "百度贴吧：吧内帖子流、帖子正文与楼层",
+  "platform.name": "贴吧",
+  "login.browser.title": "用浏览器登录",
+  "timeline.hot.title": "贴吧热议"
+}
